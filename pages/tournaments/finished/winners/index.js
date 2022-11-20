@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Layout from '../../../../components/Layout';
 import { Grid, Table, Card } from 'semantic-ui-react';
-import TournamentPoH from '../../../../ethereum/tournament';
+import TournamentUPTA from '../../../../ethereum/tournament';
 import web3 from '../../../../ethereum/web3';
 import Web3 from 'web3';
 
@@ -30,7 +30,7 @@ class IndexWinner extends Component {
 
     static async getInitialProps(props){
 
-        const tournament = await TournamentPoH (props.query.address);
+        const tournament = await TournamentUPTA (props.query.address);
         const summary = await tournament.methods.getSummary().call();
 
         let listGamers = [];
@@ -91,7 +91,7 @@ class IndexWinner extends Component {
         let first25 = mount*25/100;
         let second15 = mount*15/100;
         let third10 = mount*10/100;
-        let ubiBurner50 = mount*50/100;
+        let uptafund50 = mount*50/100;
   
       return (
         <Layout>
@@ -122,7 +122,7 @@ class IndexWinner extends Component {
                         <h4>First Place {this.props.listWinners[0]} {first25} ether</h4>
                         <h4>Second Place {this.props.listWinners[1]} {second15} ether</h4>
                         <h4>Third Place {this.props.listWinners[2]} {third10} ether</h4>
-                        <h4>ubiBurner {ubiBurner50} ether</h4>
+                        <h4>UPT Aragua fund {uptafund50} ether</h4>
                     </Grid.Column>
                 </Grid.Row>
                 <h3>Gamers</h3>

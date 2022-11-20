@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Form, Card, Grid, Button, Message, Input, Table } from 'semantic-ui-react';
 import Layout from '../../components/Layout';
-import TournamentPoH from '../../ethereum/tournament';
+import TournamentUPTA from '../../ethereum/tournament';
 import Web3 from 'web3';
 import web3 from '../../ethereum/web3';
 import { Router, Link } from '../../routes';
@@ -62,7 +62,7 @@ onSubmit = async (event) => {
     let listRegisGamers = [];
     let listGamers= [];
 
-    const tournament = await TournamentPoH (props.query.address);
+    const tournament = await TournamentUPTA (props.query.address);
     const summary = await tournament.methods.getSummary().call();
     const accounts = await web3.eth.requestAccounts();     
     const regis = await tournament.methods.getGamers(accounts[0]).call();
@@ -156,7 +156,7 @@ onSubmit = async (event) => {
       {
         header: manager,
         meta: "Address of manager",
-        description: "The manager who created the tournament and will make the payments to the winners and execute the 50% contribution to the PoH community.",
+        description: "The manager who created the tournament and will make the payments to the winners and execute the 50% contribution to the UPT Aragua community.",
         style: {overflowWrap: 'break-word'},
         key: 1
       },
@@ -198,7 +198,7 @@ onSubmit = async (event) => {
       },
       {
         header: "Prizes",
-        description: "Tournament prizes will be awarded according to the following proportion of the proceeds: first place (25%), second place (15%) and third place (10%). The remaining 50% will go to fund the PoH community and will be sent to ubiBurner.",
+        description: "Tournament prizes will be awarded according to the following proportion of the proceeds: first place (25%), second place (15%) and third place (10%). The remaining 50% will go to fund the UPT Aragua community and will be sent to uptafund.",
         key: 9
       }
 

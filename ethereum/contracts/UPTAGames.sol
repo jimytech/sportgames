@@ -2,18 +2,8 @@
 
 pragma solidity ^0.8.17;
 
-/**
- * @title ProofOfHumanity Interface
- * @dev See https://github.com/Proof-Of-Humanity/Proof-Of-Humanity.
- */
-interface IProofOfHumanity {
-    function isRegistered(address _submissionID)
-        external
-        view
-        returns (bool registered);
-}
-//Factory the PoH Tournaments 
-contract PoHGames{
+//Factory the UPTA Tournaments 
+contract UPTAGames{
     address[] public deployedTournament;
 
     /* @dev Create the  tournament 
@@ -25,7 +15,7 @@ contract PoHGames{
      */
 
     function createTournament (string memory _nameTournament, string memory _date, string memory _hour, string memory _platform, uint _registrationFees) public {
-        address newTournament = address(new TournamentPoH(_nameTournament, _date, _hour, _platform, msg.sender, _registrationFees));
+        address newTournament = address(new TournamentUPTA(_nameTournament, _date, _hour, _platform, msg.sender, _registrationFees));
         deployedTournament.push(newTournament);
     }
 
@@ -34,8 +24,8 @@ contract PoHGames{
     }
 }
 
-// Tournament POH
-contract TournamentPoH{
+// Tournament UPTA
+contract TournamentUPTA{
     struct Request{
         address manager;
         uint registrationFees;
@@ -50,11 +40,7 @@ contract TournamentPoH{
     }
     
     Request public request;
-    address payable ubiburner;
-    
-    // Proof of Humanity contract.
-    IProofOfHumanity private PoH =
-        IProofOfHumanity(0xC5E9dDebb09Cd64DfaCab4011A0D5cEDaf7c9BDb);
+    address payable uptafund;
     
     //log the player platform user and sender address
     event storedPlatformUser(
@@ -69,7 +55,7 @@ contract TournamentPoH{
         address third
     );
 
-    /** @dev Sets the PoH tournament manager, the registration fee and the address of ubiburner.
+    /** @dev Sets the UPTA tournament manager, the registration fee and the address of uptafund.
      *  @param _manager Manager of the tournament.
      *  @param _registrationFees The fee of the registration.
      */
@@ -80,8 +66,8 @@ contract TournamentPoH{
         request.platform = _platform;
         request.manager = _manager;
         request.registrationFees = _registrationFees;
-        //Set address _ubiburner
-        //ubiburner = _ubiburner;
+        //Set address _uptafund
+        //uptafund = _uptafund;
     }
 
     modifier restricted(){
@@ -94,14 +80,14 @@ contract TournamentPoH{
         _;
     }
 
-    /** @dev Registration of players (PoH humans only), must pay the registration feed for the value registrationFees.
+    /** @dev Registration of players (UPTA humans only), must pay the registration feed for the value registrationFees.
      *  @dev log the player platform user and sender address
      *  param _newUserPlatform player platform user.
      *  param _registrationFees registration fee of tournament
      */    
     function registration(string memory _newUserPlatform, uint _registrationFees) public payable isOpen {
         //It is implemented on the mainnet
-        //require(PoH.isRegistered(msg.sender), "Not registered"); //is on PoH list
+        //require(UPTA.isRegistered(msg.sender), "Not registered"); //is on UPTA list
        
         require (_registrationFees == request.registrationFees, "Set value = registrationFees in wei" );
         require (!request.gamers[msg.sender], "You are registred");
@@ -115,7 +101,7 @@ contract TournamentPoH{
         request.gamersCount++;
     }
 
-    /** @dev Uses the contract balance to pay the winners and send the rest to the ubiburner contract.
+    /** @dev Uses the contract balance to pay the winners and send the rest to the uptafund contract.
      *  @dev log the players wind
      *  @param _first The champion of the tournament.
      *  @param _second The second place of the tournament.
@@ -136,7 +122,7 @@ contract TournamentPoH{
         _second.transfer(amount15);
         _third.transfer(amount10);
 
-        //ubiburner.transfer(amount50);
+        //uptafund.transfer(amount50);
 
         request.tournamentFinished = true;//close the tournament
 

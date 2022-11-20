@@ -3,7 +3,7 @@ import { Card, Button, Grid } from 'semantic-ui-react';
 import games from '../ethereum/games';
 import Layout from '../components/Layout';
 import { Link } from '../routes';
-import TournamentPoH from '../ethereum/tournament';
+import TournamentUPTA from '../ethereum/tournament';
 
 class TournamentIndex extends Component{
     static async getInitialProps(){
@@ -15,7 +15,7 @@ class TournamentIndex extends Component{
 
         for (let i = 0; i<tournaments.length; i++)
         {
-            const tournament = await TournamentPoH(tournaments[i]);
+            const tournament = await TournamentUPTA(tournaments[i]);
             const summary = await tournament.methods.getSummary().call();          
             const regisClose = await tournament.methods.getRegistrationClose().call();
 
@@ -50,7 +50,7 @@ class TournamentIndex extends Component{
             <Layout>
                  <h3>Open Tournaments</h3>
                  <h4 style={{ color: 'red' }}>(Requires Open Metamask in Goerli Test Network)</h4>
-                 <h4>Tournaments to compete, win and contribute to humanity</h4>
+                 <h4>Tournaments to compete, win and contribute to the University</h4>
                 <Grid>
                     <Grid.Column width={12}>
                         <div>                          

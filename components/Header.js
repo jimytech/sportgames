@@ -14,7 +14,7 @@ export default () => {
                     <Menu style={{marginTop: '12px'}}>
                     <Link route='/'>
                             <a className="item">
-                                PoH Games
+                                UPT Aragua Games
                             </a>
                     </Link>
 
@@ -27,7 +27,7 @@ export default () => {
 
                             <Link route='/'>
                                 <a className="item">
-                                    PoH
+                                    UPTAragua
                                 </a>
                             </Link>                              
                     </Menu.Menu>

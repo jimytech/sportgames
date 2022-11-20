@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Layout from '../../../../components/Layout';
 import { Grid, Table, Form, Input, Message, Button} from 'semantic-ui-react';
-import TournamentPoH from '../../../../ethereum/tournament';
+import TournamentUPTA from '../../../../ethereum/tournament';
 import web3 from '../../../../ethereum/web3';
 import Web3 from 'web3';
 import { Router } from '../../../../routes';
@@ -23,7 +23,7 @@ class IndexPickWinner extends Component {
       
         try{
             //const accounts = await web3.eth.getAccounts();
-            //const tournament = await TournamentPoH (this.props.addressTourn);
+            //const tournament = await TournamentUPTA (this.props.addressTourn);
             await this.props.tournament.methods
                 .payWinnersBurner (this.state.first, this.state.second, this.state.third)
                 .send({
@@ -38,7 +38,7 @@ class IndexPickWinner extends Component {
 
     static async getInitialProps(props){
 
-        const tournament = await TournamentPoH (props.query.address);
+        const tournament = await TournamentUPTA (props.query.address);
         const summary = await tournament.methods.getSummary().call();
         const accounts = await web3.eth.getAccounts();  
         let listGamers = [];

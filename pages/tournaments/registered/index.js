@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Layout from '../../../components/Layout';
 import { Grid, Table} from 'semantic-ui-react';
-import TournamentPoH from '../../../ethereum/tournament';
+import TournamentUPTA from '../../../ethereum/tournament';
 import Web3 from 'web3';
 import web3 from '../../../ethereum/web3';
 
@@ -11,7 +11,7 @@ class RegisteredIndex extends Component {
 
         let listGamers = [];
         let gamer= {};
-        const tournament = await TournamentPoH (props.query.address);
+        const tournament = await TournamentUPTA (props.query.address);
 
         const accounts = await web3.eth.getAccounts();  
         const summary = await tournament.methods.getSummary().call();
@@ -132,8 +132,8 @@ class RegisteredIndex extends Component {
                                                 <div className="summary">
                                                     Tournament prizes will be awarded according to the following proportion of 
                                                     the proceeds: first place (25%), second place (15%) and third place (10%). 
-                                                    The remaining 50% will go to fund the PoH community and will be sent to 
-                                                    ubiBurner.
+                                                    The remaining 50% will go to fund to the UPT Aragua community and will be sent to 
+                                                    uptafund.
                                                 </div>
                                             </div>
                                         </div>

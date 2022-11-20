@@ -4,8 +4,8 @@ import games from '../../../ethereum/games';
 import Layout from '../../../components/Layout';
 import { Link } from '../../../routes';
 
-//TournamentPoH es una función 
-import TournamentPoH from '../../../ethereum/tournament';
+//TournamentUPTA es una función 
+import TournamentUPTA from '../../../ethereum/tournament';
 
 class TournamentFinish extends Component{
     static async getInitialProps(){
@@ -18,7 +18,7 @@ class TournamentFinish extends Component{
         let j = 0;
         for (let i = 0; i<tournaments.length; i++)
         {
-            const tournament = await TournamentPoH(tournaments[i]);
+            const tournament = await TournamentUPTA(tournaments[i]);
             const finishTournament = await tournament.methods.getTournamentFinished().call();
 
             let regisClose = await tournament.methods.getRegistrationClose().call();

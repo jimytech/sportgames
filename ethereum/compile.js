@@ -6,15 +6,15 @@ const buildPath = path.resolve(__dirname, 'build');
 
 fs.removeSync(buildPath);
 
-const pohgames = path.resolve(__dirname,'contracts', 'PoHGames.sol');
-const source = fs.readFileSync(pohgames, 'utf-8');
+const uptagames = path.resolve(__dirname,'contracts', 'UPTAGames.sol');
+const source = fs.readFileSync(uptagames, 'utf-8');
 
 fs.ensureDirSync(buildPath);
 
 const input = {
     language: "Solidity",
     sources: {
-      "PoHGames.sol": {
+      "UPTAGames.sol": {
         content: source,
       },
     },
@@ -28,7 +28,7 @@ const input = {
   };
    
   const output = JSON.parse(solc.compile(JSON.stringify(input))).contracts[
-    "PoHGames.sol"
+    "UPTAGames.sol"
   ];
    
   fs.ensureDirSync(buildPath);
